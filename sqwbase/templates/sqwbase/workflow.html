@@ -1,0 +1,17 @@
+{% extends "sqwbase/base.html" %}
+
+{% block content %}
+{% load mptt_tags %}
+<ol>
+    {% recursetree tasks %}
+        <li>
+        {{ node.description }} {{ node.level_attr }}
+            {% if not node.is_leaf_node %}
+                <ol>
+                    {{ children }}
+                </ol>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ol>
+{% endblock %}

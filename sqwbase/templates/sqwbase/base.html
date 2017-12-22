@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quantum Workflow</title>
+  <link rel="stylesheet" href="{% static 'sqwbase/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'sqwbase/css/custom.css' %}">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <a href="{% url 'sqwbase:index' %}">Home</a>
+        {% block content %}
+        {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'sqwbase/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'sqwbase/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
