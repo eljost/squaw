@@ -7,6 +7,10 @@ from .models import (BaseMolecule, Basis, Calculation, Method,
                      Program, Project, Task, WFMolecule, Workflow)
 
 
+class TaskAdmin(DraggableMPTTAdmin):
+    list_filter = ["workflow"]
+
+
 class TaskInline(admin.TabularInline):
     # Modify the queryset to only include Task objects belonging
     # to the current workflow.
@@ -46,6 +50,6 @@ admin.site.register(Method)
 admin.site.register(BaseMolecule)
 admin.site.register(Program)
 admin.site.register(Project)
-admin.site.register(Task, DraggableMPTTAdmin)
+admin.site.register(Task, TaskAdmin)
 admin.site.register(Workflow, WorkflowAdmin)
 admin.site.register(WFMolecule, WFMoleculeAdmin)

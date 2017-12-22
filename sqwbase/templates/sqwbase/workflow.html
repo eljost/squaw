@@ -1,17 +1,32 @@
 {% extends "sqwbase/base.html" %}
+{% load sqwbase_extras %}
 
 {% block content %}
 {% load mptt_tags %}
-<ol>
     {% recursetree tasks %}
-        <li>
-        {{ node.description }} {{ node.level_attr }}
+        {{ node.description|wrap_heading:node.level|safe }}
+        {% if node.calculations %}
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                  <th>Molecule</th>
+                  <th>Level</th>
+                  <th>Local</th>
+                  <th>Remote</th>
+              </tr>
+            </thead>
+            {% for calc in node.calculations %}
+            <tr>
+                <td>{{ calc.molecule }}</td>
+                <td>{{ calc.method }}/{{ calc.basis }}</td>
+                <td><a href="{{ calc.local_path }}">Link</a></td>
+                <td>{{ calc.remote_path }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
             {% if not node.is_leaf_node %}
-                <ol>
                     {{ children }}
-                </ol>
             {% endif %}
-        </li>
     {% endrecursetree %}
-</ol>
 {% endblock %}
