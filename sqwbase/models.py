@@ -28,12 +28,17 @@ class Task(MPTTModel):
         return self.description
 
 
-class Molecule(models.Model):
+class BaseMolecule(models.Model):
     project = models.ForeignKey(Project, on_delete=models.PROTECT)
     name = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
+
+
+class WFMolecule(models.Model):
+    molecule = models.ForeignKey(BaseMolecule, on_delete=models.PROTECT)
+    workflow = models.ForeignKey(Workflow, on_delete=models.PROTECT)
 
 
 class Method(models.Model):
@@ -60,7 +65,7 @@ class Program(models.Model):
 
 class Calculation(models.Model):
     task = TreeForeignKey(Task, on_delete=models.PROTECT)
-    molecule = models.ForeignKey(Molecule, on_delete=models.PROTECT)
+    molecule = models.ForeignKey(WFMolecule, on_delete=models.PROTECT)
     local_path = models.CharField(max_length=250, blank=True)
     remote_path = models.CharField(max_length=250, blank=True)
     calculation_comment = models.TextField(blank=True)
