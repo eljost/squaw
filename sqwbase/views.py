@@ -1,5 +1,6 @@
 from django.db.models import prefetch_related_objects
 from django.shortcuts import render
+from django.views.generic import DetailView
 
 from .models import (Calculation, Molecule, Project,
                      Task, Workflow)
@@ -36,7 +37,6 @@ def mol_workflow(request, workflow_id, molecule_id):
     for t in Task.objects.filter(workflow__pk=workflow_id):
         filters = {
             "task": t,
-            "molecule__id": molecule_id,
         }
         t.calculations = Calculation.objects.filter(**filters)
         tasks.append(t)
@@ -45,4 +45,8 @@ def mol_workflow(request, workflow_id, molecule_id):
                 "workflow": workflow,
                 "tasks": tasks,
     }
-    return render(request, "sqwbase/workflow.html", context)
+    return render(request, "sqwbase/mol_workflow.html", context)
+
+
+class CalculationDetail(DetailView):
+    model = Calculation

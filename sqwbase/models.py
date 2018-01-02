@@ -24,6 +24,7 @@ class Task(MPTTModel):
                             on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField()
+    analysis = models.TextField(blank=True)
 
     def __str__(self):
         return self.title

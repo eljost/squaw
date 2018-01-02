@@ -2,49 +2,16 @@
 {% load sqwbase_extras %}
 
 {% block content %}
-<h1>{{ molecule.project }} - {{ molecule }}</h1>
+
+<h1>{{ workflow.project }}</h1>
 {% load mptt_tags %}
-    {% recursetree tasks %}
-        {{ node.description|wrap_heading:node.level|safe }}
-        {% if node.calculations %}
-        <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                 <th>Title</th>
-                 <th>Level</th>
-                 <th></th>
-              </tr>
-            </thead>
-            {% for calc in node.calculations %}
-            <tr>
-                <td>{{ calc.title }}</td>
-                <td>{{ calc.method }}/{{ calc.basis }}</td>
-                <td><button class="btn" type="button" data-toggle="collapse"
-                        data-target="#coll{{ calc.id }}"
-                     aria-expanded="false" aria-controls="coll{{ forloop.counter }}">Show
-                    </button>
-                </td>
-            </tr>
-            <tbody class="collapse table-sm" id="coll{{ calc.id }}">
-                <tr>
-                    <th>Local:</th>
-                    <td>{{ calc.local_path }}</td>
-                </tr>
-                <tr>
-                    <th>Remote:</th>
-                    <td>{{ calc.remote_path }}</td>
-                </tr>
-                <tr>
-                    <th>Comment:</th>
-                    <td>{{ calc.calculation_comment }}</td>
-                </tr>
-            </tbody>
-            {% endfor %}
-        </table>
-        {% endif %}
-            {% if not node.is_leaf_node %}
-                    {{ children }}
-            {% endif %}
-    {% endrecursetree %}
-    <span class="glyphicon glyphicon-plus"></span>
+
+{% recursetree tasks %}
+{{ node.description|wrap_heading:node.level|safe }}
+<p>{{ node.analysis }}</p>
+  {% if not node.is_leaf_node %}
+    {{ children }}
+  {% endif %}
+{% endrecursetree %}
+
 {% endblock %}
