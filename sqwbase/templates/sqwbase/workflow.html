@@ -2,6 +2,7 @@
 {% load sqwbase_extras %}
 
 {% block content %}
+<h1>{{ molecule.project }} - {{ molecule }}</h1>
 {% load mptt_tags %}
     {% recursetree tasks %}
         {{ node.description|wrap_heading:node.level|safe }}
@@ -9,24 +10,22 @@
         <table class="table">
             <thead class="thead-dark">
               <tr>
-                  <th>Molecule</th>
-                  <th>Level</th>
-                  <th>Comment</th>
-                  <th></th>
+                 <th>Title</th>
+                 <th>Level</th>
+                 <th></th>
               </tr>
             </thead>
             {% for calc in node.calculations %}
             <tr>
-                <td>{{ calc.molecule }}</td>
+                <td>{{ calc.title }}</td>
                 <td>{{ calc.method }}/{{ calc.basis }}</td>
-                <td>{{ calc.calculation_comment|truncatechars:30 }}</td>
                 <td><button class="btn" type="button" data-toggle="collapse"
-                     data-target="#coll{{ forloop.counter }}"
+                        data-target="#coll{{ calc.id }}"
                      aria-expanded="false" aria-controls="coll{{ forloop.counter }}">Show
                     </button>
                 </td>
             </tr>
-            <tbody class="collapse" id="coll{{ forloop.counter }}">
+            <tbody class="collapse table-sm" id="coll{{ calc.id }}">
                 <tr>
                     <th>Local:</th>
                     <td>{{ calc.local_path }}</td>

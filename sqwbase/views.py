@@ -1,15 +1,15 @@
 from django.db.models import prefetch_related_objects
 from django.shortcuts import render
 
-from .models import (Calculation, BaseMolecule, Project,
-                     Task, WFMolecule, Workflow)
+from .models import (Calculation, Molecule, Project,
+                     Task, Workflow)
 
 
 def index(request):
-    rel_fields = ("molecule", "molecule__project", "workflow")
-    wf_molecules = WFMolecule.objects.select_related(*rel_fields).all()
+    fields = ("project", "workflow")
+    molecules = Molecule.objects.prefetch_related(*fields).all()
     context = {
-                "molecules": wf_molecules,
+                "molecules": molecules,
     }
     return render(request, "sqwbase/index.html", context)
 
@@ -27,15 +27,21 @@ def workflow(request, workflow_id):
     return render(request, "sqwbase/workflow.html", context)
 
 
-def workflow_molecule(request, workflow_id):
+def mol_workflow(request, workflow_id, molecule_id):
     # https://stackoverflow.com/questions/31172680
     # prefetch geht nicht weil task kein workflow foreign key hat
+    molecule = Molecule.objects.select_related("project").get(pk=molecule_id)
     workflow = Workflow.objects.get(pk=workflow_id)
     tasks = list()
     for t in Task.objects.filter(workflow__pk=workflow_id):
-        t.calculations = Calculation.objects.filter(task=t)
+        filters = {
+            "task": t,
+            "molecule__id": molecule_id,
+        }
+        t.calculations = Calculation.objects.filter(**filters)
         tasks.append(t)
     context = {
+                "molecule": molecule,
                 "workflow": workflow,
                 "tasks": tasks,
     }
