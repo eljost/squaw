@@ -11,17 +11,35 @@
               <tr>
                   <th>Molecule</th>
                   <th>Level</th>
-                  <th>Local</th>
-                  <th>Remote</th>
+                  <th>Comment</th>
+                  <th></th>
               </tr>
             </thead>
             {% for calc in node.calculations %}
             <tr>
                 <td>{{ calc.molecule }}</td>
                 <td>{{ calc.method }}/{{ calc.basis }}</td>
-                <td><a href="{{ calc.local_path }}">Link</a></td>
-                <td>{{ calc.remote_path }}</td>
+                <td>{{ calc.calculation_comment|truncatechars:30 }}</td>
+                <td><button class="btn" type="button" data-toggle="collapse"
+                     data-target="#coll{{ forloop.counter }}"
+                     aria-expanded="false" aria-controls="coll{{ forloop.counter }}">Show
+                    </button>
+                </td>
             </tr>
+            <tbody class="collapse" id="coll{{ forloop.counter }}">
+                <tr>
+                    <th>Local:</th>
+                    <td>{{ calc.local_path }}</td>
+                </tr>
+                <tr>
+                    <th>Remote:</th>
+                    <td>{{ calc.remote_path }}</td>
+                </tr>
+                <tr>
+                    <th>Comment:</th>
+                    <td>{{ calc.calculation_comment }}</td>
+                </tr>
+            </tbody>
             {% endfor %}
         </table>
         {% endif %}
@@ -29,4 +47,5 @@
                     {{ children }}
             {% endif %}
     {% endrecursetree %}
+    <span class="glyphicon glyphicon-plus"></span>
 {% endblock %}

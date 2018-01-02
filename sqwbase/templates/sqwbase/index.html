@@ -2,14 +2,15 @@
 
 {% block content %}
 <h1>Projects</h1>
+
+{% regroup molecules by molecule.project as projects_list %}
+{% for project in projects_list %}
+<h2>{{ project.grouper }}</h2>
     <ol>
-    {% for project, workflows in zipped %}
-        <li>{{ project.name }}</li>
-        <ol>
-        {% for wf in workflows %}
-            <li><a href="{% url 'sqwbase:workflow' wf.id %}">{{ wf.name }}</a></li>
-        {% endfor %}
-        </ol>
+    {% for molecule in project.list %}
+        <li>{{ molecule }}</li>
     {% endfor %}
     </ol>
+{% endfor %}
+
 {% endblock %}
