@@ -3,12 +3,15 @@
 
 {% block content %}
 
-<h1>{{ workflow.project }}</h1>
+<h1>{{ workflow.project }} - {{ workflow.name }}</h1>
 {% load mptt_tags %}
 
 {% recursetree tasks %}
 {{ node.description|wrap_heading:node.level|safe }}
-<p>{{ node.analysis }}</p>
+  {% if node.analysis %}
+  <!--<p><strong>Analysis: </strong>{{ node.analysis }}</p>-->
+  <p>{{ node.analysis }}</p>
+  {% endif %}
   {% if not node.is_leaf_node %}
     {{ children }}
   {% endif %}
