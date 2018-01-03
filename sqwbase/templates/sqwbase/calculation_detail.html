@@ -1,0 +1,43 @@
+{% extends "sqwbase/base.html" %}
+{% load static %}
+
+{% block content %}
+  <h1>{{ calculation.molecule }} - {{ calculation.title }}</h1>
+  <table class="table">
+    <tr>
+      <th>Task:</th>
+      <td>{{ calculation.task }}</td>
+    </tr>
+    <tr>
+      <th>Level:</th>
+      <td>{{ calculation.method }}/{{ calculation.basis }}</td>
+    </tr>
+    <tr>
+      <th>Local:</th>
+      <td>{{ calculation.local_path }}</td>
+    </tr>
+    <tr>
+      <th>Remote:</th>
+      <td>{{ calculation.remote_path }}</td>
+    </tr>
+    <tr>
+      <th>Comment:</th>
+      <td>{{ calculation.calculation_comment }}</td>
+    </tr>
+    <tr>
+      <th>Program:</th>
+      <td>{{ calculation.program }}</td>
+    </tr>
+  </table>
+  <a href="{% url 'admin:sqwbase_calculation_change' calculation.pk %}">Change</a>
+
+  <!--
+  <script src="{% static 'sqwbase/js/ngl.js' %}"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var stage = new NGL.Stage("viewport");
+      stage.loadFile("file:///scratch/programme/squaw/aspdb.pdb", {defaultRepresentation: true});
+    });
+  </script>
+  <div id="viewport" style="width:600px; height:600px;"></div>-->
+{% endblock %}

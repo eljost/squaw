@@ -1,0 +1,47 @@
+{% extends "sqwbase/base.html" %}
+{% load sqwbase_extras %}
+
+{% block content %}
+<h1>{{ molecule }}: {{ molecule.project }}
+    - <a href="{% url 'sqwbase:workflow' workflow.id %}">{{ workflow.name }}</a>
+</h1>
+
+{% load mptt_tags %}
+    {% recursetree tasks %}
+        {{ node.title|wrap_heading:node.level|safe }}
+        <p class="text-info">{{ node.description }}</p>
+        {% if node.calculations %}
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                 <th class="col-md-3">Level</th>
+                 <th class="col-md-9">Title</th>
+              </tr>
+            </thead>
+            {% for calc in node.calculations %}
+            <tr data-toggle="collapse" data-target="#coll{{ calc.id }}">
+                <td>{{ calc.method }}/{{ calc.basis }}</td>
+                <td><a href="{% url 'sqwbase:calculation' calc.id %}">{{ calc.title }}</a></td>
+            </tr>
+            <tbody class="collapse table-sm workflow-detail" id="coll{{ calc.id }}">
+                <tr>
+                    <th>Local:</th>
+                    <td>{{ calc.local_path }}</td>
+                </tr>
+                <tr>
+                    <th>Remote:</th>
+                    <td>{{ calc.remote_path }}</td>
+                </tr>
+                <tr>
+                    <th>Comment:</th>
+                    <td>{{ calc.calculation_comment }}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+        {% endif %}
+            {% if not node.is_leaf_node %}
+                    {{ children }}
+            {% endif %}
+    {% endrecursetree %}
+{% endblock %}
