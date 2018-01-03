@@ -4,7 +4,7 @@ from django.contrib import admin
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 
 from .models import (Molecule, Basis, Calculation, Method,
-                     Program, Project, Task, Workflow)
+                     Program, Project, SolventModel, Task, Workflow)
 
 
 class TaskAdmin(DraggableMPTTAdmin):
@@ -34,7 +34,8 @@ class CalculationInline(admin.StackedInline):
     # Modify the queryset to only include Task objects belonging
     # to Workflows of the project.
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "task":
+        if ("object_id" in request.resolver_match.kwargs
+            and db_field.name == "task"):
             obj_id = request.resolver_match.kwargs["object_id"]
             workflow_ids = Molecule.objects.get(pk=obj_id).workflow.values("id")
             kwargs["queryset"] = Task.objects.filter(workflow_id__in=workflow_ids)
@@ -51,5 +52,6 @@ admin.site.register(Method)
 admin.site.register(Molecule, MoleculeAdmin)
 admin.site.register(Program)
 admin.site.register(Project)
+admin.site.register(SolventModel)
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Workflow, WorkflowAdmin)

@@ -61,6 +61,13 @@ class Program(models.Model):
         return "{} {}".format(self.name, self.version)
 
 
+class SolventModel(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Calculation(models.Model):
     title = models.CharField(max_length=250)
     task = TreeForeignKey(Task, on_delete=models.CASCADE)
@@ -68,6 +75,8 @@ class Calculation(models.Model):
     local_path = models.CharField(max_length=250, blank=True)
     remote_path = models.CharField(max_length=250, blank=True)
     calculation_comment = models.TextField(blank=True)
+    solvent = models.ForeignKey(SolventModel, blank=True,
+                                on_delete=models.CASCADE)
 
     method = models.ForeignKey(Method, null=True, blank=True,
                                on_delete=models.CASCADE)

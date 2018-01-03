@@ -14,13 +14,13 @@
         <table class="table">
             <thead class="thead-dark">
               <tr>
-                 <th class="col-md-3">Level</th>
-                 <th class="col-md-9">Title</th>
+                 <th class="col-md-5">Level</th>
+                 <th class="col-md-7">Title</th>
               </tr>
             </thead>
             {% for calc in node.calculations %}
             <tr data-toggle="collapse" data-target="#coll{{ calc.id }}">
-                <td>{{ calc.method }}/{{ calc.basis }}</td>
+                <td>{{ calc.method }}/{{ calc.basis }}/{{ calc.solvent }}</td>
                 <td><a href="{% url 'sqwbase:calculation' calc.id %}">{{ calc.title }}</a></td>
             </tr>
             <tbody class="collapse table-sm workflow-detail" id="coll{{ calc.id }}">
