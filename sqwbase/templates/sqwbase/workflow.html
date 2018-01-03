@@ -1,5 +1,5 @@
 {% extends "sqwbase/base.html" %}
-{% load sqwbase_extras %}
+{% load sqwbase_extras admin_urls %}
 
 {% block content %}
 
@@ -7,14 +7,15 @@
 {% load mptt_tags %}
 
 {% recursetree tasks %}
-{{ node.description|wrap_heading:node.level|safe }}
+{{ node.title|wrap_heading:node.level|safe }}
+<p class="text-info">{{ node.description }}</p>
   {% if node.analysis %}
-  <!--<p><strong>Analysis: </strong>{{ node.analysis }}</p>-->
-  <p>{{ node.analysis }}</p>
+  {{ node.analysis|linebreaks }}
   {% endif %}
   {% if not node.is_leaf_node %}
     {{ children }}
   {% endif %}
 {% endrecursetree %}
+<a href="{% url 'admin:sqwbase_workflow_change' workflow.pk %}">Change</a>
 
 {% endblock %}
