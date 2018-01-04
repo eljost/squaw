@@ -1,5 +1,5 @@
 {% extends "sqwbase/base.html" %}
-{% load sqwbase_extras admin_urls %}
+{% load sqwbase_extras admin_urls markdownify %}
 
 {% block content %}
 
@@ -10,7 +10,8 @@
 {{ node.title|wrap_heading:node.level|safe }}
 <p class="text-info">{{ node.description }}</p>
   {% if node.analysis %}
-  {{ node.analysis|linebreaks }}
+  <strong>Analysis</strong>
+  {{ node.analysis|markdownify }}
   {% endif %}
   {% if not node.is_leaf_node %}
     {{ children }}
