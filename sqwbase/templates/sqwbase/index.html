@@ -8,6 +8,7 @@
 <h2>{{ project.grouper }}</h2>
     {% for molecule in project.list %}
         <h3>{{ molecule }}</h3>
+        <p class="text-info">{{ molecule.description }}</p>
         <ol>
             {% for workflow in molecule.workflow.all %}
             <li><a href="{% url 'sqwbase:mol_workflow' workflow.id molecule.id %}">{{ workflow }}</a></li>

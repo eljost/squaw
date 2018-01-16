@@ -5,6 +5,7 @@
 <h1>{{ molecule }}: {{ molecule.project }}
     - <a href="{% url 'sqwbase:workflow' workflow.id %}">{{ workflow.name }}</a>
 </h1>
+<p class="text-info">{{ molecule.description }}</p>
 
 {% load mptt_tags %}
     {% recursetree tasks %}
