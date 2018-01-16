@@ -37,6 +37,7 @@ def mol_workflow(request, workflow_id, molecule_id):
     for t in Task.objects.filter(workflow__pk=workflow_id):
         filters = {
             "task": t,
+            "molecule": molecule,
         }
         t.calculations = Calculation.objects.filter(**filters)
         tasks.append(t)
