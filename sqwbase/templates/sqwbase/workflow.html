@@ -4,19 +4,20 @@
 {% block content %}
 
 <h1>{{ workflow.project }} - {{ workflow.name }}</h1>
+  <a href="{% url 'admin:sqwbase_workflow_change' workflow.pk %}"><i class="fa fa-edit"></i> Edit</a>
+  <table class="table">
 {% load mptt_tags %}
 
 {% recursetree tasks %}
 {{ node.title|wrap_heading:node.level|safe }}
 <p class="text-info">{{ node.description }}</p>
   {% if node.analysis %}
-  <strong>Analysis</strong>
+  <strong>Analysis:</strong>
   {{ node.analysis|markdownify }}
   {% endif %}
   {% if not node.is_leaf_node %}
     {{ children }}
   {% endif %}
 {% endrecursetree %}
-<a href="{% url 'admin:sqwbase_workflow_change' workflow.pk %}">Change</a>
 
 {% endblock %}
