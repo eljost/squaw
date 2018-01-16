@@ -85,6 +85,7 @@ class Calculation(models.Model):
                               on_delete=models.CASCADE)
     program = models.ForeignKey(Program, null=True, blank=True,
                                 on_delete=models.CASCADE)
+    pdb_file = models.FileField(blank=True, upload_to="pdbs/")
 
     def __str__(self):
         return self.title

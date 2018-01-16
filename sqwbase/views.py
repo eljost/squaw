@@ -49,5 +49,20 @@ def mol_workflow(request, workflow_id, molecule_id):
     return render(request, "sqwbase/mol_workflow.html", context)
 
 
+def calculation(request, calculation_id):
+    calculation = Calculation.objects.get(pk=calculation_id)
+    if calculation.pdb_file:
+        with open(calculation.pdb_file.path) as handle:
+            pdb = handle.read()
+    else:
+        pdb = False
+
+    context = {
+        "calculation": calculation,
+        "pdb": pdb,
+    }
+    return render(request, "sqwbase/calculation_detail.html", context)
+
+
 class CalculationDetail(DetailView):
     model = Calculation

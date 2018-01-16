@@ -35,13 +35,17 @@
     </tr>
   </table>
 
-  <!--
+  {% if pdb %}
   <script src="{% static 'sqwbase/js/ngl.js' %}"></script>
   <script>
+    const pdb_str = `{{ pdb }}`;
     document.addEventListener("DOMContentLoaded", function () {
       var stage = new NGL.Stage("viewport");
-      stage.loadFile("file:///scratch/programme/squaw/aspdb.pdb", {defaultRepresentation: true});
+      stage.loadFile( new Blob([pdb_str], {type: 'text/plain'}),
+                     { ext:'pdb', defaultRepresentation: true }
+      );
     });
   </script>
-  <div id="viewport" style="width:600px; height:600px;"></div>-->
+  <div id="viewport" style="width:400px; height:400px;"></div>
+  {% endif %}
 {% endblock %}
