@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "sqwbase",
+    "sqwbase.apps.SqwbaseConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,3 +125,5 @@ STATIC_URL = '/static/'
 MARKDOWNIFY_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.fenced_code',
 ]
+
+MEDIA_ROOT = "/scratch/programme/squaw/media_root/"

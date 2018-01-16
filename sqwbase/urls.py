@@ -8,6 +8,7 @@ urlpatterns = [
     path("workflow/<int:workflow_id>/", views.workflow, name="workflow"),
     path("workflow/<int:workflow_id>/molecule/<int:molecule_id>",
          views.mol_workflow, name="mol_workflow"),
-    path("calculation/<int:pk>", views.CalculationDetail.as_view(),
-         name="calculation"),
+    #path("calculation/<int:pk>", views.CalculationDetail.as_view(),
+    #     name="calculation"),
+    path("calculation/<int:calculation_id>/", views.calculation, name="calculation"),
 ]
