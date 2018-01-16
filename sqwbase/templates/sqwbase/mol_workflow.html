@@ -41,6 +41,13 @@
                 </tr>
             </tbody>
             {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <a href="{% url 'admin:sqwbase_calculation_add' %}?molecule={{ molecule.pk }}&task={{ node.pk }}"><i class="fa fa-plus"></i></a>
+                </td>
+            </tr>
         </table>
         {% endif %}
             {% if not node.is_leaf_node %}
