@@ -2,9 +2,18 @@
 {% load static %}
 
 {% block content %}
-<ul>
+<table class="table">
+  <tr>
+      <th>Project</th>
+      <th>Molecule</th>
+      <th>Description</th>
+   </tr>
 {% for molecule in object_list %}
-  <li><a href="{% url 'sqwbase:molecule' molecule.pk %}">{{ molecule.name }}</a></li> 
+  <tr>
+      <td>{{ molecule.project }}</td>
+      <td><a href="{% url 'sqwbase:molecule' molecule.pk %}">{{ molecule.name }}</a></td>
+      <td>{{ molecule.description }}</td>
+  </tr>
 {% endfor %}
-</ul>
+</table>
 {% endblock %}

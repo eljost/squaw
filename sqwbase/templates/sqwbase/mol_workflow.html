@@ -10,7 +10,7 @@
 {% load mptt_tags %}
     {% recursetree tasks %}
         {{ node.title|wrap_heading:node.level|safe }}
-        <p class="text-info">{{ node.description }}</p>
+        <span class="text-info">{{ node.description }}</span>
         {% if node.calculations %}
         <table class="table">
             <thead class="thead-dark">
@@ -49,6 +49,8 @@
                 </td>
             </tr>
         </table>
+        {% else %}
+        <p><a href="{% url 'admin:sqwbase_calculation_add' %}?molecule={{ molecule.pk }}&task={{ node.pk }}">(<i class="fa fa-plus"></i> Add first calculation)</a></p>
         {% endif %}
             {% if not node.is_leaf_node %}
                     {{ children }}
