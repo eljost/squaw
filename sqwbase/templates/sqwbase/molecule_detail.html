@@ -1,0 +1,42 @@
+{% extends "sqwbase/base.html" %}
+{% load static %}
+
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    workflow = models.ManyToManyField(Workflow)
+    description = models.TextField(blank=True)
+    pdb_file = models.FileField(blank=True, upload_to=rename_pdb)
+
+{% block content %}
+  <h1>Molecule {{ molecule.name }}</h1>
+  <table class="table">
+    <tr>
+      <th>Project:</th>
+      <td>{{ molecule.project }}</td>
+    </tr>
+    <tr>
+      <th>Workflows:</th>
+      <td>{% for workflow in molecule.workflow.all %}{{ workflow.name }}<br />{% endfor %}</td>
+    </tr>
+    <tr>
+      <th>Description:</th>
+      <td>{{ molecule.description }}</td>
+    </tr>
+  </table>
+  <a href="{% url 'admin:sqwbase_molecule_change' molecule.pk %}"><i class="fa fa-edit"></i> Edit</a>
+
+  {% if pdb %}
+  <script src="{% static 'sqwbase/js/ngl.js' %}"></script>
+  <script>
+    const pdb_str = `{{ pdb }}`;
+    document.addEventListener("DOMContentLoaded", function () {
+      var stage = new NGL.Stage("viewport");
+      stage.loadFile( new Blob([pdb_str], {type: 'text/plain'}),
+                     { ext:'pdb', defaultRepresentation: true }
+      );
+      stage.autoView();
+    });
+  </script>
+  <div id="viewport" style="width:600px; height:600px;"></div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "sqwbase/base.html" %}
+{% load static %}
+
+{% block content %}
+<ul>
+{% for molecule in object_list %}
+  <li><a href="{% url 'sqwbase:molecule' molecule.pk %}">{{ molecule.name }}</a></li> 
+{% endfor %}
+</ul>
+{% endblock %}
