@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-{% regroup object_list by project as by_project %}
+{% regroup object_list|dictsort:"project.name" by project as by_project %}
 {% for project in by_project %}
 <h1>{{ project.grouper }}</h1>
 <table class="table">
