@@ -2,18 +2,20 @@
 {% load static %}
 
 {% block content %}
+{% regroup object_list by project as by_project %}
+{% for project in by_project %}
+<h1>{{ project.grouper }}</h1>
 <table class="table">
   <tr>
-      <th>Project</th>
-      <th>Molecule</th>
-      <th>Description</th>
+      <th class="col-md-4">Molecule</th>
+      <th class="col-md-8">Description</th>
    </tr>
-{% for molecule in object_list %}
+{% for molecule in project.list %}
   <tr>
-      <td>{{ molecule.project }}</td>
       <td><a href="{% url 'sqwbase:molecule' molecule.pk %}">{{ molecule.name }}</a></td>
       <td>{{ molecule.description }}</td>
   </tr>
 {% endfor %}
 </table>
+{% endfor %}
 {% endblock %}
