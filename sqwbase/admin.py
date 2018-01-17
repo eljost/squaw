@@ -3,7 +3,7 @@ import re
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 
-from .models import (Molecule, Basis, Calculation, Method,
+from .models import (Molecule, Basis, Calculation, Method, MoleculeTaskMatrix,
                      Program, Project, SolventModel, Task, Workflow)
 
 
@@ -55,6 +55,7 @@ admin.site.register(Basis)
 admin.site.register(Calculation, CalculationAdmin)
 admin.site.register(Method)
 admin.site.register(Molecule, MoleculeAdmin)
+admin.site.register(MoleculeTaskMatrix)
 admin.site.register(Program)
 admin.site.register(Project)
 admin.site.register(SolventModel)

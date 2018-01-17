@@ -104,3 +104,8 @@ class Calculation(models.Model):
 
     def __str__(self):
         return self.title
+
+class MoleculeTaskMatrix(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    task = models.ManyToManyField(Task)
+    molecule = models.ManyToManyField(Molecule)
