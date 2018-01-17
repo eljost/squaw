@@ -18,7 +18,11 @@
     </tr>
     <tr>
       <th>Workflows:</th>
-      <td>{% for workflow in molecule.workflow.all %}{{ workflow.name }}<br />{% endfor %}</td>
+      <td>
+        {% for workflow in molecule.workflow.all %}
+        <a href="{% url 'sqwbase:mol_workflow' workflow.id molecule.id %}">{{ workflow.name }}</a><br />
+        {% endfor %}
+      </td>
     </tr>
     <tr>
       <th>Description:</th>
