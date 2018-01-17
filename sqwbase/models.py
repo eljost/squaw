@@ -100,6 +100,7 @@ class Calculation(models.Model):
     program = models.ForeignKey(Program, null=True, blank=True,
                                 on_delete=models.CASCADE)
     pdb_file = models.FileField(blank=True, upload_to=rename_pdb)
+    result = models.BooleanField()
 
     def __str__(self):
         return self.title
