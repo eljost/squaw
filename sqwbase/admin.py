@@ -28,6 +28,11 @@ class WorkflowAdmin(admin.ModelAdmin):
     inlines = [TaskInline]
 
 
+class CalculationAdmin(admin.ModelAdmin):
+    list_display = ("molecule", "task", "title")
+    list_filter = ("molecule", "task", "method", "basis")
+
+
 class CalculationInline(admin.StackedInline):
     model = Calculation
     extra = 1
@@ -47,7 +52,7 @@ class MoleculeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Basis)
-admin.site.register(Calculation)
+admin.site.register(Calculation, CalculationAdmin)
 admin.site.register(Method)
 admin.site.register(Molecule, MoleculeAdmin)
 admin.site.register(Program)

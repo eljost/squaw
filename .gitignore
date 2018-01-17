@@ -102,4 +102,6 @@ ENV/
 
 *.swp
 *.sqlite3
+*.sqlite3.backup*
 calc_dumps/*
+media_root/*
