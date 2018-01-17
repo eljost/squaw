@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Projects</h1>
 
-{% regroup molecules by project as project_list %}
+{% regroup molecules|dictsort:"project.name" by project as project_list %}
 {% for project in project_list %}
 <h2>{{ project.grouper }}</h2>
     {% for molecule in project.list %}
