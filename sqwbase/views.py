@@ -1,6 +1,6 @@
 from django.db.models import prefetch_related_objects
 from django.shortcuts import render
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
 from .models import (Calculation, Molecule, Project,
                      Task, Workflow)
@@ -64,5 +64,27 @@ def calculation(request, calculation_id):
     return render(request, "sqwbase/calculation_detail.html", context)
 
 
-class CalculationDetail(DetailView):
-    model = Calculation
+#class CalculationDetail(DetailView):
+#    model = Calculation
+
+
+class MoleculeDetail(DetailView):
+    model = Molecule
+
+
+def molecule(request, molecule_id):
+    molecule = Molecule.objects.get(pk=molecule_id)
+    if molecule.pdb_file:
+        with open(molecule.pdb_file.path) as handle:
+            pdb = handle.read()
+    else:
+        pdb = False
+
+    context = {
+        "molecule": molecule,
+        "pdb": pdb,
+    }
+    return render(request, "sqwbase/molecule_detail.html", context)
+
+class MoleculeList(ListView):
+    model = Molecule
