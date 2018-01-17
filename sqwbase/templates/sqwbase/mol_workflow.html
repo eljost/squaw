@@ -2,10 +2,10 @@
 {% load sqwbase_extras %}
 
 {% block content %}
-<h1>{{ molecule }}: {{ molecule.project }}
+<h1><a href="{% url 'sqwbase:molecule' molecule.id %}">{{ molecule }}</a>: {{ molecule.project }}
     - <a href="{% url 'sqwbase:workflow' workflow.id %}">{{ workflow.name }}</a>
 </h1>
-<p class="text-info">{{ molecule.description }}</p>
+<!--<p class="text-info">{{ molecule.description }}</p>-->
 
 {% load mptt_tags %}
     {% recursetree tasks %}

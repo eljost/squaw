@@ -9,6 +9,8 @@
 
 {% block content %}
   <h1>Molecule {{ molecule.name }}</h1>
+  <div class="row">
+  <div class="col-md-5">
   <table class="table">
     <tr>
       <th>Project:</th>
@@ -24,8 +26,10 @@
     </tr>
   </table>
   <a href="{% url 'admin:sqwbase_molecule_change' molecule.pk %}"><i class="fa fa-edit"></i> Edit</a>
+  </div>
 
   {% if pdb %}
+  <div class="col-md-7">
   <script src="{% static 'sqwbase/js/ngl.js' %}"></script>
   <script>
     const pdb_str = `{{ pdb }}`;
@@ -38,5 +42,7 @@
     });
   </script>
   <div id="viewport" style="width:600px; height:600px;"></div>
+  </div>
   {% endif %}
+  </div>
 {% endblock %}

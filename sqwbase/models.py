@@ -26,7 +26,8 @@ class Workflow(models.Model):
     name = models.CharField(max_length=150)
 
     def __str__(self):
-        return "{} - {}".format(self.project.name, self.name)
+        #return "{} - {}".format(self.project.name, self.name)
+        return self.name
 
 
 class Task(MPTTModel):

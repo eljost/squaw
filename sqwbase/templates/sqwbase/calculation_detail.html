@@ -3,7 +3,6 @@
 
 {% block content %}
   <h1>{{ calculation.molecule }} - {{ calculation.title }}</h1>
-  <a href="{% url 'admin:sqwbase_calculation_change' calculation.pk %}"><i class="fa fa-edit"></i> Edit</a>
   <table class="table">
     <tr>
       <th>Task:</th>
@@ -34,6 +33,7 @@
       <td>{{ calculation.program }}</td>
     </tr>
   </table>
+  <a href="{% url 'admin:sqwbase_calculation_change' calculation.pk %}"><i class="fa fa-edit"></i> Edit</a>
 
   {% if pdb %}
   <script src="{% static 'sqwbase/js/ngl.js' %}"></script>

@@ -4,8 +4,6 @@
 {% block content %}
 
 <h1>{{ workflow.project }} - {{ workflow.name }}</h1>
-  <a href="{% url 'admin:sqwbase_workflow_change' workflow.pk %}"><i class="fa fa-edit"></i> Edit</a>
-  <table class="table">
 {% load mptt_tags %}
 
 {% recursetree tasks %}
@@ -19,5 +17,7 @@
     {{ children }}
   {% endif %}
 {% endrecursetree %}
+
+<a href="{% url 'admin:sqwbase_workflow_change' workflow.pk %}"><i class="fa fa-edit"></i> Edit</a>
 
 {% endblock %}
