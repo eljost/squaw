@@ -15,4 +15,5 @@ urlpatterns = [
     path("calculation/<int:calculation_id>/", views.calculation, name="calculation"),
     path("molecule/<int:molecule_id>/", views.molecule, name="molecule"),
     path("molecules/", views.MoleculeList.as_view(), name="molecules"),
+    path("workflows/", views.WorkflowList.as_view(), name="workflows"),
 ]

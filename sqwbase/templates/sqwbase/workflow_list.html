@@ -1,0 +1,14 @@
+{% extends "sqwbase/base.html" %}
+{% load static %}
+
+{% block content %}
+{% regroup object_list by project as by_project %}
+{% for project in by_project %}
+<h1>{{ project.grouper }}</h1>
+<ol>
+{% for workflow in project.list %}
+  <li><a href="{% url 'sqwbase:workflow' workflow.id %}">{{ workflow.name }}</a></td>
+{% endfor %}
+</ol>
+{% endfor %}
+{% endblock %}

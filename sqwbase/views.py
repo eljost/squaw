@@ -88,3 +88,7 @@ def molecule(request, molecule_id):
 
 class MoleculeList(ListView):
     model = Molecule
+
+
+class WorkflowList(ListView):
+    model = Workflow
