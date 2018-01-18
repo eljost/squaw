@@ -4,6 +4,7 @@
 <h1>Projects</h1>
 
 {% regroup molecules|dictsort:"project.name" by project as project_list %}
+{% comment %}
 {% for project in project_list %}
 <h2>{{ project.grouper }}</h2>
     {% for molecule in project.list %}
@@ -15,6 +16,30 @@
             {% endfor %}
         </ol>
     {% endfor %}
+{% endfor %}
+{% endcomment %}
+
+{% for project in project_list %}
+<h2>{{ project.grouper }}</h2>
+    <table class="table">
+        <tr>
+            <th>Molecule</th>
+            <th>Workflows</th>
+        </tr>
+    {% for molecule in project.list %}
+      <tr>
+        <td>
+            <a href="{% url 'sqwbase:molecule' molecule.pk %}">{{ molecule }}</a>
+        </td>
+        <td>
+          {% for workflow in molecule.workflow.all %}
+            <a href="{% url 'sqwbase:mol_workflow' workflow.id molecule.id %}">
+                {{ workflow.name }}</a>{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
 {% endfor %}
 
 {% endblock %}
