@@ -1,6 +1,10 @@
 {% extends "sqwbase/base.html" %}
 {% load static %}
 
+{% block title %}
+ Workflows
+{% endblock %}
+
 {% block content %}
 {% regroup object_list by project as by_project %}
 {% for project in by_project %}

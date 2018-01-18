@@ -1,11 +1,9 @@
 {% extends "sqwbase/base.html" %}
 {% load static %}
 
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
-    workflow = models.ManyToManyField(Workflow)
-    description = models.TextField(blank=True)
-    pdb_file = models.FileField(blank=True, upload_to=rename_pdb)
+{% block title %}
+ {{ molecule.name }}
+{% endblock %}
 
 {% block content %}
   <h1>Molecule {{ molecule.name }}</h1>

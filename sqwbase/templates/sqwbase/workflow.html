@@ -1,8 +1,11 @@
 {% extends "sqwbase/base.html" %}
 {% load sqwbase_extras admin_urls markdownify %}
 
-{% block content %}
+{% block title %}
+ {{ workflow.name }}
+{% endblock %}
 
+{% block content %}
 <h1>{{ workflow.project }} - {{ workflow.name }}</h1>
 {% load mptt_tags %}
 

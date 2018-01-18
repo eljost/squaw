@@ -1,6 +1,10 @@
 {% extends "sqwbase/base.html" %}
 {% load static %}
 
+{% block title %}
+ {{ calculation.molecule }} - {{ calculation.title }}
+{% endblock %}
+
 {% block content %}
   <h1>{{ calculation.molecule }} - {{ calculation.title }}</h1>
   <table class="table">

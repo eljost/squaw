@@ -1,6 +1,10 @@
 {% extends "sqwbase/base.html" %}
 {% load sqwbase_extras %}
 
+{% block title %}
+ {{ molecule.name }} - {{ workflow.name }}
+{% endblock %}
+
 {% block content %}
 <h1><a href="{% url 'sqwbase:molecule' molecule.id %}">{{ molecule }}</a>: {{ molecule.project }}
     - <a href="{% url 'sqwbase:workflow' workflow.id %}">{{ workflow.name }}</a>
