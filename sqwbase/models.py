@@ -2,7 +2,6 @@ from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-
 def rename_pdb(instance, filename):
     if isinstance(instance, Molecule):
         prefix = "molecule_"
@@ -104,6 +103,7 @@ class Calculation(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class MoleculeTaskMatrix(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)

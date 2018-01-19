@@ -86,6 +86,7 @@ def molecule(request, molecule_id):
     }
     return render(request, "sqwbase/molecule_detail.html", context)
 
+
 class MoleculeList(ListView):
     model = Molecule
 
