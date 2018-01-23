@@ -24,11 +24,11 @@
     </tr>
     <tr>
       <th>Local:</th>
-      <td>{{ calculation.local_path }}</td>
+      <td id="localpath">{{ calculation.local_path }}</td>
     </tr>
     <tr>
       <th>Remote:</th>
-      <td>{{ calculation.remote_path }}</td>
+      <td id="remotepath">{{ calculation.remote_path }}</td>
     </tr>
     <tr>
       <th>Comment:</th>
@@ -41,6 +41,8 @@
   </table>
   <a href="{% url 'admin:sqwbase_calculation_change' calculation.pk %}"><i class="fa fa-edit"></i> Edit</a>
   </div>
+
+
 
   {% if pdb %}
   <div class="col-md-6">

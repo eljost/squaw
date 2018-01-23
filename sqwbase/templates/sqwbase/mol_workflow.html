@@ -35,11 +35,21 @@
             <tbody class="collapse table-sm workflow-detail" id="coll{{ calc.id }}">
                 <tr>
                     <th>Local:</th>
-                    <td>{{ calc.local_path }}</td>
+                    <td id="localpath{{ calc.id }}">{{ calc.local_path }}</td>
+                    {% if calc.local_path %}
+                    <td>
+                      <button class="copybtn btn" data-clipboard-action="copy" data-clipboard-target="#localpath{{ calc.id }}">Copy</button>
+                    </td>
+                    {% endif %}
                 </tr>
                 <tr>
                     <th>Remote:</th>
-                    <td>{{ calc.remote_path }}</td>
+                    <td id="remotepath{{ calc.id }}">{{ calc.remote_path }}</td>
+                    {% if calc.remote_path %}
+                    <td>
+                      <button class="copybtn btn" data-clipboard-action="copy" data-clipboard-target="#remotepath{{ calc.id }}">Copy</button>
+                    </td>
+                    {% endif %}
                 </tr>
                 <tr>
                     <th>Comment:</th>
